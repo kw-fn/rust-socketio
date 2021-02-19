@@ -1,16 +1,14 @@
-FROM node:14-alpine
-FROM rust:1.50
+FROM debian:latest 
+FROM node:14
 
-WORKDIR /test
+WORKDIR / 
 
 RUN npm install socket.io
 RUN npm install socket.io-client
 
-COPY . .
+COPY ./ /rust-socketio/
 
 EXPOSE 4200
 
-CMD [ "node", "socket-io.js" ]
-CMD [ "node", "engine-io.js" ]
-
-RUN USER=root cargo test
+CMD [ "node", "./examples/socket-io.js" ]
+CMD [ "node", "./examples/engine-io.js" ]
